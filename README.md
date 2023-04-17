@@ -1,5 +1,9 @@
 ### t½ - Life Journeys of Wikipedia's Top Figures Throughout History
  ###### By: Yichen Zhang, Kenny He Chen, Kohei Sumida
+  ###### University of British Columbia - CPSC 447: Intro. to Visualization, Jan 2023
+
+
+
 
 Credits:
 
