@@ -34,17 +34,18 @@ class Graph {
      * display person's tooltip with relevant information in both scatterPlot and the Map View
      */
     showPersonTooltip(event, d, vis) {
-        const regionName = d.bplace_region_name
+        const birthRegionName = d.bplace_geacron_name !== '' ? d.bplace_geacron_name :d.bplace_country
         const name = d.name
         const birthPlace = d.bplace_name
         const occupation = d.occupation
         const pageViews = d.non_en_page_views
-        const alive = d.alive
-        const twitter = d.twitter
-        const hasTwitter = twitter !== ''
-        const diedIn = d.dplace_name
-        const hasDeathPlace = diedIn !== ''
+        const deathRegionName = d.dplace_geacron_name !== '' ? d.dplace_geacron_name :d.dplace_country
         const isAlive = d.alive === 'True';
+
+        let deathPlaceName = d.dplace_name + ', ' + deathRegionName;
+        if (deathRegionName === '' && d.dplace_name  === '') {
+            deathPlaceName = 'Unknown'
+        }
 
         d3.select('#tooltip')
             .style('display', 'block')
@@ -52,12 +53,11 @@ class Graph {
             .style('top', event.pageY + vis.tooltipPaddingY + 'px').html(`
       <div class="tooltip-title">${name}</div>
             <div class="tooltip-text">${d.birthyear}  &nbsp - &nbsp  ${isAlive ? '' : d.deathyear}</div>
-      <div class="tooltip-text"><li>Birth Place: ${regionName}, ${birthPlace}</li></div>
+      <div class="tooltip-text"><li>Birth Place: ${birthPlace}, ${birthRegionName}</li></div>
       <div class="tooltip-text"><li>Occupation: ${occupation}</li></div>
       <div class="tooltip-text"><li>Page views: ${pageViews}</li></div>
-      <div class="tooltip-text"><li>Alive: ${alive}</li></div>
-      ${hasTwitter ? `<div><li>Twitter account: ${twitter}</li></div>` : ''}
-      ${hasDeathPlace ? `<div><li>Died in: ${diedIn}</li></div>` : ''}
+      <div class="tooltip-text"><li>Alive: ${isAlive}</li></div>
+      ${!isAlive? `<div><li>Died in: ${deathPlaceName}</li></div>` : ''}
         `)
     }
 
