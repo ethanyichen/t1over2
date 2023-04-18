@@ -21,7 +21,7 @@ class BarChart extends Graph {
         this.highlightColor = '#f5b35b'
         this.dispatch = _dispatch
         this.occupationDispatch = _dispatch2
-        this.numberOfOccupations = 7
+        this.numberOfOccupations = 6
         this.selectedCountry = _country
 
         this.yDomain = [0, d3.max(this.parsedData, (d) => d.occupationCount)]
