@@ -22,19 +22,6 @@ let activePeriods = []
 // controls number of marks on scatter-plot and zoomed-in map, showing top few sorted by page views
 const infoDensityIndex = 20
 
-
-// show contents after loaded and set loading circle invisible
-document.addEventListener('readystatechange', event => {
-  if (event.target.readyState === "complete") {
-    let loadingItem = document.getElementsByClassName("lds-ring")[0];
-    loadingItem.style.display = 'none';
-    let containers = document.getElementsByClassName("container");
-    for (let i = 0; i < containers.length; i++) {
-      containers[i].style.display = 'block';
-    }
-  }
-});
-
 // Load data and initialize the graphs
 d3.csv('data/person_2020_update.csv').then((_data) => {
   data = _data
@@ -58,29 +45,37 @@ d3.csv('data/person_2020_update.csv').then((_data) => {
 
   data = data.filter(filterFunction)
 
-  map = new MapGraph(data, { parentElement: '#map-graph' , infoDensityIndex: infoDensityIndex},mapDispatch, mapHoverDispatch)
+  map = new MapGraph(data, {
+    parentElement: '#map-graph',
+    infoDensityIndex: infoDensityIndex
+  }, mapDispatch, mapHoverDispatch)
 
   barChart = new BarChart(
-    data,
-    { parentElement: '#bar-chart' },
-    barChartDispatch,
-    data,
+      data,
+      {parentElement: '#bar-chart'},
+      barChartDispatch,
+      data,
       selectedCountry,
       occupationDispatch
   )
   scatterPlot = new ScatterPlot(data,
-    { parentElement: '#scatter-plot' , infoDensityIndex: infoDensityIndex},selectedCountry,activeOccupation,scatterplotHoverDispatch);
+      {
+        parentElement: '#scatter-plot',
+        infoDensityIndex: infoDensityIndex
+      }, selectedCountry, activeOccupation, scatterplotHoverDispatch);
 
 
   // initialize timePeriod and set display values based on initial selection
   d3.json('data/historical_time_periods.json').then((data) => {
         historicalTimePeriods = data;
         periodNameArr = historicalTimePeriods.map(o => o["Name"]);
-        timePeriod = new TimePeriod(historicalTimePeriods, {parentElement: '#time-periods'},timePeriodDispatch);
+        timePeriod = new TimePeriod(historicalTimePeriods, {parentElement: '#time-periods'}, timePeriodDispatch);
         timePeriod.updateVis();
         timePeriod.setInitialActivePeriodsAndUpdateViews();
       }
   )
+
+  finishLoadingSetContentVisible();
 });
 
 
@@ -229,4 +224,14 @@ function toTitleCase(str) {
   return str.toLowerCase().replace(/\b\w/g, function (match) {
     return match.toUpperCase();
   });
+}
+
+// set loadingItem invisible and set containers visible
+function finishLoadingSetContentVisible() {
+  let loadingItem = document.getElementsByClassName("lds-ring")[0];
+  loadingItem.style.display = 'none';
+  let containers = document.getElementsByClassName("container");
+  for (let i = 0; i < containers.length; i++) {
+    containers[i].style.display = 'block';
+  }
 }
