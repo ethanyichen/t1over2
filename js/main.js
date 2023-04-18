@@ -22,6 +22,17 @@ let activePeriods = []
 // controls number of marks on scatter-plot and zoomed-in map, showing top few sorted by page views
 const infoDensityIndex = 20
 
+
+// show content after loading and set loading circle invisible
+window.onload = async () => {
+  let loadingItem = document.getElementsByClassName("lds-ring")[0];
+  loadingItem.style.display = 'none';
+  let containers = document.getElementsByClassName("container");
+  for (let i = 0; i < containers.length; i++) {
+    containers[i].style.display = 'block';
+  }
+};
+
 // Load data and initialize the graphs
 d3.csv('data/person_2020_update.csv').then((_data) => {
   data = _data
