@@ -41,8 +41,6 @@ d3.csv('data/person_2020_update.csv').then((_data) => {
     d.alive = toTitleCase(d.alive)
   })
 
-  let occupations = d3.group(data, (d) => d.occupation);
-
   let filterFunction = (d) => (d.non_en_page_views > 100000 || d.hpi > 65)
 
   data = data.filter(filterFunction)

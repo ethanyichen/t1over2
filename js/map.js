@@ -68,8 +68,7 @@ class MapGraph extends Graph {
             .range(vis.colorRange)
             .interpolate(d3.interpolateRgb);
 
-        const dataValue = 50;
-        const colorForDataValue = vis.colorScale(dataValue);
+        const dataValue = 50;;
 
         vis.peopleByCountry = vis.reduceInfoDensityByCountry(vis)
 
