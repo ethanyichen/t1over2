@@ -150,6 +150,7 @@ class MapGraph extends Graph {
                     .join('path')
                     .attr('class', d => 'country ' + getCountryName(d).replace(' ', '_'))
                     .attr('d', vis.path)
+                    .attr('cursor', 'pointer')
                     .on('mouseover', function (event, d) {
                         hoverCountry(event, d, this, vis)
                     })

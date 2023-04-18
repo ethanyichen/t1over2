@@ -261,6 +261,8 @@ class ScatterPlot extends Graph {
         vis.activeTimePeriods = activeTimePeriods
     }
     openWikiPage(slug) {
-        window.open("https://en.wikipedia.org/wiki/" + slug)
+        if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            window.open("https://en.wikipedia.org/wiki/" + slug)
+        }
     }
 }

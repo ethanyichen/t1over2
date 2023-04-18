@@ -164,7 +164,8 @@ input {
 
 .time-period-bar:hover {
     stroke: #777;
-    stroke-width: 2px
+    stroke-width: 2px;
+    cursor: pointer;
 }
 
 .time-period-bar.active {

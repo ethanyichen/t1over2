@@ -171,7 +171,8 @@ class BarChart extends Graph {
                 if (d.occupationName === vis.highlightedOccupation) {
                     return '#000';
                 }
-            });
+            })
+            .attr('cursor', 'pointer');
 
         // Handle hover and clicks
         vis.bar
