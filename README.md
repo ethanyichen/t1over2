@@ -2,8 +2,9 @@
  ###### By: Yichen Zhang, Kenny He Chen, Kohei Sumida
   ###### University of British Columbia - CPSC 447: Intro. to Visualization, Jan 2023
 
-![alt text](https://github.com/ethanyichen/t1over2.github.io/blob/main/readMeThumbNail.png)
+#### https://ethanyichen.github.io/t1over2/
 
+![alt text](https://github.com/ethanyichen/t1over2.github.io/blob/main/readMeThumbNail.png)
 
 Credits:
 
