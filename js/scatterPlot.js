@@ -4,10 +4,10 @@ class ScatterPlot extends Graph {
         this.data = _data
         this.config = {
             parentElement: _config.parentElement,
-            containerWidth: 800,
+            containerWidth: 650,
             containerHeight: 380,
             infoDensityIndex: _config.infoDensityIndex,
-            margin: {top: 28, right: 85, bottom: 95, left: 85},
+            margin: {top: 28, right: 55, bottom: 95, left: 65},
         }
 
         this.tooltipPaddingX = -300

@@ -15,8 +15,8 @@ class MapGraph extends Graph {
         this.config = {
             parentElement: _config.parentElement,
             infoDensityIndex: _config.infoDensityIndex,
-            containerWidth: _config.containerWidth || 1700,
-            containerHeight: _config.containerWidth || 500,
+            containerWidth: _config.containerWidth || 1400,
+            containerHeight: _config.containerWidth || 450,
             margin: {top: 45, right: 35, bottom: 65, left: 25},
         }
         //padding for tooltip

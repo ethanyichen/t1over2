@@ -4,9 +4,9 @@ class TimePeriod {
         this.historicalTimePeriods = _data
         this.config = {
             parentElement: _config.parentElement,
-            containerWidth: _config.containerWidth || 1700,
+            containerWidth: _config.containerWidth || 1350,
             containerHeight: _config.containerHeight || 30,
-            barHeight: _config.barHeight || 14,
+            barHeight: _config.barHeight || 15,
             barPaddingInner: _config.barPaddingInner || -0.005,
             labelYPosition: _config.barYPosition || 0,
             labelXCenteringConstant: 95,

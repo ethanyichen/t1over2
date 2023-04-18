@@ -3,7 +3,7 @@ class BarChart extends Graph {
         super();
         this.config = {
             parentElement: _config.parentElement,
-            containerWidth: 800,
+            containerWidth: 600,
             containerHeight: 380,
             margin: {top: 32, right: 65, bottom: 75, left: 55},
         }

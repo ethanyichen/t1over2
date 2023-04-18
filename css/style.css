@@ -2,7 +2,7 @@ body {
     font-family: 'Noto Sans JP', sans-serif;
     font-size: 12px;
     background: #F2F4F8;
-    display: block;
+    display: inline-block;
     text-align: center;
 }
 
@@ -142,10 +142,6 @@ input {
     font-family: sans-serif;
     fill: #727272;
     font-weight: 600;
-}
-
-.row {
-    display: flex;
 }
 
 .map-description {
