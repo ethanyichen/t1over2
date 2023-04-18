@@ -175,14 +175,15 @@ class ScatterPlot extends Graph {
                     .classed('highlighted', true)
                     .style('stroke-width', 2);
                 vis.highlightDispatcher(event);
-
-
             })
             .on('mouseleave', (event, d) => {
                 vis.hideToolTip();
                 d3.select(event.currentTarget)
                     .classed('highlighted', false);
                 vis.highlightDispatcher(event);
+            })
+            .on('click', (event, d) => {
+                vis.openWikiPage(d.slug)
             })
 
         //vis.updateVis()
@@ -258,5 +259,8 @@ class ScatterPlot extends Graph {
     setTimePeriods(activeTimePeriods) {
         let vis = this;
         vis.activeTimePeriods = activeTimePeriods
+    }
+    openWikiPage(slug) {
+        window.open("https://en.wikipedia.org/wiki/" + slug)
     }
 }

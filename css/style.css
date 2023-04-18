@@ -251,6 +251,7 @@ h1 {
 .point:hover {
     stroke: #000;
     fill: #f5b35b;
+    cursor: pointer;
 }
 
 .point.occupationHighlighted {
