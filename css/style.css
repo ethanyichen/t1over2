@@ -71,7 +71,7 @@ body {
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     grid-template-rows: 25px 0;
-    grid-gap: 15px;
+    grid-column-gap: 20px;
     align-items: center;
 }
 
@@ -80,7 +80,7 @@ body {
     display: block;
     border-bottom: 1px solid #ccc;
     border-top: 1px solid #ccc;
-    height: 7px;
+    height: 8px;
     background-color: #f8f8f8;
 }
 

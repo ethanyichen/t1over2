@@ -5,15 +5,15 @@ class TimePeriod {
         this.config = {
             parentElement: _config.parentElement,
             containerWidth: _config.containerWidth || 1350,
-            containerHeight: _config.containerHeight || 30,
-            barHeight: _config.barHeight || 15,
+            containerHeight: _config.containerHeight || 50,
+            barHeight: _config.barHeight || 14,
             barPaddingInner: _config.barPaddingInner || -0.005,
             labelYPosition: _config.barYPosition || 0,
-            labelXCenteringConstant: 95,
+            labelXCenteringConstant: 45,
             barYPosition: _config.barYPosition || 7,
             edgeRadius: _config.edgeRadius || 5,
             tooltipPadding: _config.tooltipPadding || 5,
-            margin: _config.margin || {top: 10, right: 35, bottom: 10, left: 25},
+            margin: _config.margin || {top: 20, right: 35, bottom: 20, left: 25},
         }
         this.dispatch = _dispatch
         this.activePeriods = []
