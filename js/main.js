@@ -23,15 +23,17 @@ let activePeriods = []
 const infoDensityIndex = 20
 
 
-// show content after loading and set loading circle invisible
-window.onload = () => {
-  let loadingItem = document.getElementsByClassName("lds-ring")[0];
-  loadingItem.style.display = 'none';
-  let containers = document.getElementsByClassName("container");
-  for (let i = 0; i < containers.length; i++) {
-    containers[i].style.display = 'block';
+// show contents after loaded and set loading circle invisible
+document.addEventListener('readystatechange', event => {
+  if (event.target.readyState === "complete") {
+    let loadingItem = document.getElementsByClassName("lds-ring")[0];
+    loadingItem.style.display = 'none';
+    let containers = document.getElementsByClassName("container");
+    for (let i = 0; i < containers.length; i++) {
+      containers[i].style.display = 'block';
+    }
   }
-};
+});
 
 // Load data and initialize the graphs
 d3.csv('data/person_2020_update.csv').then((_data) => {
