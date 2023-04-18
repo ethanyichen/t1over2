@@ -24,7 +24,7 @@ const infoDensityIndex = 20
 
 
 // show content after loading and set loading circle invisible
-window.onload = async () => {
+window.onload = () => {
   let loadingItem = document.getElementsByClassName("lds-ring")[0];
   loadingItem.style.display = 'none';
   let containers = document.getElementsByClassName("container");
