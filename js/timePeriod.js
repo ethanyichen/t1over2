@@ -23,6 +23,9 @@ class TimePeriod {
         this.initVis()
     }
 
+    /**
+     * Initialize variables and scales
+     */
     initVis() {
         let vis = this
         vis.width = vis.config.containerWidth - vis.config.margin.left - vis.config.margin.right;
@@ -46,12 +49,18 @@ class TimePeriod {
             .attr('transform', `translate(${vis.config.margin.left},${vis.config.margin.top})`);
     }
 
+    /**
+     * Update svg
+     */
     updateVis() {
         let vis = this
 
         vis.renderVis();
     }
 
+    /**
+     * Render svg components based on data
+     */
     renderVis() {
         let vis = this
         vis.bars = vis.chart.selectAll('.time-period-bar')
@@ -117,6 +126,9 @@ class TimePeriod {
         d3.select('#tooltip').style('display', 'none')
     }
 
+    /**
+     * Set svg element active based on initialActivePeriods, update views with dispatcher
+     */
     setInitialActivePeriodsAndUpdateViews() {
         let vis = this;
         d3.selectAll('.time-period-bar').classed('active', d => vis.initialActivePeriods.includes(vis.timePeriodName(d)));

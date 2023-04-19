@@ -33,8 +33,10 @@ class BarChart extends Graph {
         this.initVis()
     }
 
+    /**
+     * Create SVG area, initialize scales and axes
+     */
     initVis() {
-        // Create SVG area, initialize scales and axes
 
         let vis = this
         vis.container = d3.select(vis.config.parentElement)
@@ -76,6 +78,28 @@ class BarChart extends Graph {
         vis.occupationInputOnChange()
     }
 
+    /**
+     * Update view data and render svg
+     */
+    updateVis() {
+        let vis = this
+        vis.parseData(vis.inputOccupation)
+        vis.yDomain = [0, d3.max(this.parsedData, (d) => d.occupationCount)]
+        vis.yScale.domain(vis.yDomain)
+        vis.yAxisG.transition()
+            .duration(500).call(vis.yAxis)
+        vis.xScale.domain(vis.xDomain)
+        vis.xAxisG.transition()
+            .duration(500).call(vis.xAxis)
+
+        vis.title.text(vis.getTitle())
+
+
+        vis.renderVis()
+        // Prepare data and scales
+    }
+
+    // XAxis scale initialization and rendering
     renderXAxis() {
         let vis = this
 
@@ -99,6 +123,7 @@ class BarChart extends Graph {
             .call(vis.xAxis)
     }
 
+    // YAxis scale initialization and rendering
     renderYAxis() {
         let vis = this
         vis.yScale = d3
@@ -117,24 +142,9 @@ class BarChart extends Graph {
             .call(vis.yAxis)
     }
 
-    updateVis() {
-        let vis = this
-        vis.parseData(vis.inputOccupation)
-        vis.yDomain = [0, d3.max(this.parsedData, (d) => d.occupationCount)]
-        vis.yScale.domain(vis.yDomain)
-        vis.yAxisG.transition()
-            .duration(500).call(vis.yAxis)
-        vis.xScale.domain(vis.xDomain)
-        vis.xAxisG.transition()
-            .duration(500).call(vis.xAxis)
-
-        vis.title.text(vis.getTitle())
-
-
-        vis.renderVis()
-        // Prepare data and scales
-    }
-
+    /**
+     * render svg components based on view data
+     */
     renderVis() {
         //Bind data to visual elements, update axes
         let vis = this
@@ -232,9 +242,11 @@ class BarChart extends Graph {
         }
     }
 
+    /**
+     * Parse barchart data to group and sort based on occupation and occupationCount, select the top items based on input
+     */
     parseData(inputOccupation) {
         let vis = this
-        //vis.xDomain = []
         let result = []
 
         const group = d3.group(vis.data, (d) => d.occupation)
@@ -262,6 +274,7 @@ class BarChart extends Graph {
 
     }
 
+    // returns color information for marks based on occupation selection
     getColor(d) {
         let vis = this
 
@@ -274,6 +287,7 @@ class BarChart extends Graph {
         }
     }
 
+    // returns the title text for barchart
     getTitle() {
         let vis = this
         if (vis.selectedCountry === '') {
@@ -293,6 +307,7 @@ class BarChart extends Graph {
         vis.resetOccupationInput()
     }
 
+    // set input datalist drop down options based on data updates
     setOccupationDataList() {
         let vis = this;
         let dataList = document.getElementById('occupation-datalist');
@@ -309,6 +324,7 @@ class BarChart extends Graph {
         });
     }
 
+    // add listener for input changes
     occupationInputOnChange() {
         let vis = this;
         vis.input = document.getElementById('datalist-value');

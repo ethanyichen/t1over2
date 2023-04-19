@@ -28,6 +28,9 @@ class ScatterPlot extends Graph {
         this.initVis()
     }
 
+    /**
+     * Initialize variables and render data independent svg
+     */
     initVis() {
         let vis = this
 
@@ -83,7 +86,7 @@ class ScatterPlot extends Graph {
         vis.renderVis()
     }
 
-    // Initialize the scale;
+    // XAxis scale initialization and rendering
     renderXAxis() {
         let vis = this;
 
@@ -106,6 +109,7 @@ class ScatterPlot extends Graph {
             .call(vis.xAxis)
     }
 
+    // YAxis scale initialization and rendering
     renderYAxis() {
         let vis = this;
 
@@ -125,6 +129,9 @@ class ScatterPlot extends Graph {
             .attr('transform', `translate(0, ${vis.config.margin.top})`)
     }
 
+    /**
+     * Update corresponding data based on view updates, rerender svg components
+     */
     updateVis() {
         let vis = this;
 
@@ -145,6 +152,9 @@ class ScatterPlot extends Graph {
         vis.renderVis();
     }
 
+    /**
+     * Render svg components with enter/update/exit pattern
+     */
     renderVis() {
         let vis = this;
         //Show top 100 if the data length > 100
@@ -189,6 +199,9 @@ class ScatterPlot extends Graph {
         //vis.updateVis()
     }
 
+    /**
+     * Calls dispatch to other views to trigger highlight events on other views
+     */
     highlightDispatcher(event) {
         let vis = this;
         const occupation = vis.scatterPlot.selectAll('.point.highlighted').data().map(d => d.occupation);
@@ -203,7 +216,9 @@ class ScatterPlot extends Graph {
     }
 
 
-
+    /**
+     * Highlight corresponding svg based on dispatch
+     */
     handleDispatch() {
         let vis = this;
         d3.selectAll('.point')
@@ -216,6 +231,9 @@ class ScatterPlot extends Graph {
             })
     }
 
+    /**
+     * Get scatter plot title text
+     */
     getTitle() {
         let vis = this
         if (vis.activeOccupation === '') {
@@ -245,6 +263,9 @@ class ScatterPlot extends Graph {
         vis.highlightedOccupation = '';
     }
 
+    /**
+     * return text display of current selected time periods
+     */
     displayTimePeriods() {
         let vis = this
         if(vis.activeTimePeriods.length > 1) {
@@ -260,6 +281,10 @@ class ScatterPlot extends Graph {
         let vis = this;
         vis.activeTimePeriods = activeTimePeriods
     }
+
+    /**
+     * Open corresponding wikipedia page if viewing from Desktop
+     */
     openWikiPage(slug) {
         if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             window.open("https://en.wikipedia.org/wiki/" + slug)

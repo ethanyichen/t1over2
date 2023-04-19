@@ -19,7 +19,7 @@ let selectedCountry = ''
 let activeOccupation = ''
 let activePeriods = []
 
-// controls number of marks on scatter-plot and zoomed-in map, showing top few sorted by page views
+// controls number of marks on scatter-plot and zoomed-in map, showing top x marks sorted by page views
 const infoDensityIndex = 20
 
 // Load data and initialize the graphs
@@ -41,10 +41,13 @@ d3.csv('data/person_2020_update.csv').then((_data) => {
     d.alive = toTitleCase(d.alive)
   })
 
+  /**
+   * Filter original dataset based on page view data and hpi (Historical popularity index - doi: 10.1038/sdata.2015.75)
+   */
   let filterFunction = (d) => (d.non_en_page_views > 100000 || d.hpi > 65)
-
   data = data.filter(filterFunction)
 
+  // initialize views
   map = new MapGraph(data, {
     parentElement: '#map-graph',
     infoDensityIndex: infoDensityIndex
@@ -58,6 +61,7 @@ d3.csv('data/person_2020_update.csv').then((_data) => {
       selectedCountry,
       occupationDispatch
   )
+
   scatterPlot = new ScatterPlot(data,
       {
         parentElement: '#scatter-plot',
@@ -65,7 +69,7 @@ d3.csv('data/person_2020_update.csv').then((_data) => {
       }, selectedCountry, activeOccupation, scatterplotHoverDispatch);
 
 
-  // initialize timePeriod and set display values based on initial selection
+  // initialize timePeriod and set display values based on initial time periods selection
   d3.json('data/historical_time_periods.json').then((data) => {
         historicalTimePeriods = data;
         periodNameArr = historicalTimePeriods.map(o => o["Name"]);
@@ -75,6 +79,7 @@ d3.csv('data/person_2020_update.csv').then((_data) => {
       }
   )
 
+  // on successful data loading, set loading circle invisible and set display contents visible
   finishLoadingSetContentVisible();
 });
 
@@ -110,6 +115,7 @@ scatterplotHoverDispatch.on('scatterplotHoverDispatch', (event) => {
   map.dispatchHandle();
 });
 
+// Dispatcher handler for country selection (map -> bar && Scatterplot)
 mapDispatch.on('mapDispatch', (eventData) => {
   selectedCountry = eventData
 
@@ -122,6 +128,7 @@ mapDispatch.on('mapDispatch', (eventData) => {
   updateMap()
 });
 
+// Dispatcher handler for hovering person points on map (map -> bar && Scatterplot)
 mapHoverDispatch.on('mapHoverDispatch', (event) => {
   if(event.id === undefined){
     event.id = '';
@@ -135,6 +142,7 @@ mapHoverDispatch.on('mapHoverDispatch', (event) => {
   scatterPlot.handleDispatch();
 })
 
+// Dispatcher handler for selecting occupation in barchart view (bar -> map && Scatterplot)
 barChartDispatch.on('barChartDispatch', (event) => {
   activeOccupation = event.activeOccupation;
   scatterPlot.activeOccupation = activeOccupation;
@@ -144,6 +152,7 @@ barChartDispatch.on('barChartDispatch', (event) => {
   updateMap()
 });
 
+// Dispatcher handler for selecting time periods  (timePeriod -> bar && map && Scatterplot)
 timePeriodDispatch.on('timePeriodDispatch', (event) => {
   activePeriods = event
 
@@ -160,6 +169,7 @@ timePeriodDispatch.on('timePeriodDispatch', (event) => {
   updateMap()
 });
 
+// Update barChart view based on data updates from dispatchers
 function updateBarChart () {
   barChart.selectedCountry = selectedCountry
   if (selectedCountry === '') {
@@ -171,6 +181,7 @@ function updateBarChart () {
   barChart.updateVis()
 }
 
+// Update scatterPlot view based on data updates from dispatchers
 function updateScatterPlot () {
   scatterPlot.selectedCountry = selectedCountry
   scatterPlot.activeOccupation = activeOccupation
@@ -192,6 +203,7 @@ function updateScatterPlot () {
   scatterPlot.updateVis()
 }
 
+// Update map view based on data updates from dispatchers
 function updateMap() {
   const noActiveOccupation =activeOccupation === ''
   map.data = data.filter(isWithinSelectedPeriods)
@@ -202,10 +214,12 @@ function updateMap() {
 }
 
 
+// returns true if the person is born within selected year range
 function isInYearRange (y,yearRange){
   return y <= yearRange[1] && y >= yearRange[0]
 }
 
+// returns true if the person is born within selected periods
 function isWithinSelectedPeriods(d) {
   const birthyear = d.birthyear
   let display = false
