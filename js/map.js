@@ -24,7 +24,7 @@ class MapGraph extends Graph {
         this.tooltipPaddingY = 20
 
         //map zoom and translation, based on selected view
-        this.mapZoom = 120
+        this.mapZoom = 110
         this.mapTranslate = [this.config.containerWidth / 2, this.config.containerHeight / 1.4]
         this.duration = 100
         //Color settings
