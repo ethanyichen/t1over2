@@ -136,7 +136,7 @@ class MapGraph extends Graph {
                 const presimplified = topojson.presimplify(data);
 
                 // Set the simplification threshold
-                const threshold = 0.6;
+                const threshold = 0.1;
 
                 // Simplify the TopoJSON
                 const simplified = topojson.simplify(presimplified, threshold);

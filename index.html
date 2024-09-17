@@ -13,12 +13,18 @@
 <!-- Title -->
 <!-- Place this tag where you want the button to render. -->
 
-<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+<div class="lds-ring">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
 <div class="container">
     <div class="col">
         <div class="vis_title">
             <h1> t½
-                <a class="git-icon" href="https://github.com/ethanyichen/t1over2/" target="_blank"><i class="fa fa-github" style="font-size:24px"></i></a>
+                <a class="git-icon" href="https://github.com/ethanyichen/t1over2/" target="_blank"><i
+                        class="fa fa-github" style="font-size:24px"></i></a>
                 <span> Life journeys of Wikipedia's top figures throughout history </span>
             </h1>
         </div>
@@ -34,16 +40,31 @@
     <div class="col">
         <div>
             <svg width="1600" height="600" id="map-graph"></svg>
-            <input type="text" id="datalist-value" list="occupation-datalist" onfocus="this.value=''" onchange="this.blur();" placeholder="search occupation">
-            <datalist id="occupation-datalist">
-            </datalist>
         </div>
     </div>
     <div class="col">
-        <div>
-            <svg id="bar-chart"></svg>
-            <svg id="scatter-plot"></svg>
-        </div>
+        <table class="col-table">
+            <tr>
+                <td>
+                    <input type="text" id="datalist-value" list="occupation-datalist" onfocus="this.value=''"
+                           onchange="this.blur();" placeholder="search occupation">
+                    <datalist id="occupation-datalist">
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <svg id="bar-chart"></svg>
+                </td>
+                <td>
+                    <svg id="scatter-plot"></svg>
+                </td>
+            </tr>
+        </table>
+        <!--        <div>-->
+        <!--            <svg id="bar-chart"></svg>-->
+        <!--            <svg id="scatter-plot"></svg>-->
+        <!--        </div>-->
     </div>
 </div>
 

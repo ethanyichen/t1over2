@@ -132,6 +132,7 @@ class TimePeriod {
     setInitialActivePeriodsAndUpdateViews() {
         let vis = this;
         d3.selectAll('.time-period-bar').classed('active', d => vis.initialActivePeriods.includes(vis.timePeriodName(d)));
+        d3.selectAll('.time-period-label').classed('active', d => vis.initialActivePeriods.includes(vis.timePeriodName(d)));
         vis.activePeriods = vis.initialActivePeriods
         vis.dispatch.call('timePeriodDispatch', null, vis.activePeriods)
     }
