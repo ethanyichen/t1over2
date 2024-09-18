@@ -20,7 +20,7 @@ let activeOccupation = ''
 let activePeriods = []
 
 // controls number of marks on scatter-plot and zoomed-in map, showing top x marks sorted by page views
-const infoDensityIndex = 20
+const infoDensityIndex = 40
 
 // Load data and initialize the graphs
 d3.csv('data/person_2020_update.csv').then((_data) => {
