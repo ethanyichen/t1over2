@@ -359,6 +359,7 @@ function renderPersonPoints(vis) {
                 hoverDispatcher(event, vis);
             })
             .on('click', (event, d) => {
+                event.stopPropagation();
                 openWikiPage(d.slug)
             })
             .attr('class', 'person-point')
