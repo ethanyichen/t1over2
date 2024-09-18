@@ -83,9 +83,6 @@ class MapGraph extends Graph {
 
         vis.legend.remove()
 
-        // reduce information density in countries with lots of marks
-        vis.peopleByCountry = vis.reduceInfoDensityByCountry(vis)
-
         vis.views = d3.rollup(vis.data, v => d3.sum(v, d => d.non_en_page_views), d => d.bplace_country)
         vis.viewsDomain = [Math.min(...vis.views.values()), Math.max(...vis.views.values())]
         vis.colorScale.domain(vis.viewsDomain)
