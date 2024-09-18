@@ -358,7 +358,11 @@ function renderPersonPoints(vis) {
                 vis.hideToolTip()
                 hoverDispatcher(event, vis);
             })
+            .on('click', (event, d) => {
+                openWikiPage(d.slug)
+            })
             .attr('class', 'person-point')
+            .attr('cursor', 'pointer')
             .attr('display', 'none')
             .classed('active', d => vis.selectedCountry === d.bplace_country)
             .attr('r', vis.radius + 'px')
@@ -452,5 +456,14 @@ function showCountryTooltip(event, d, vis) {
           <div class="tooltip-title">${countryName}</div>
           <div><i>Total Page views: ${totalPageViewsMillion} Million</i></div>
         `)
+    }
+}
+
+/**
+ * Open corresponding wikipedia page if viewing from Desktop
+ */
+function openWikiPage(slug) {
+    if(!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        window.open("https://en.wikipedia.org/wiki/" + slug)
     }
 }
